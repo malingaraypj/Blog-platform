@@ -1,0 +1,14 @@
+import AccountSwitchTab from "./AccountSwitchTab";
+import SectionTab from "./SectionTab";
+import SiteIcon from "./SiteIcon";
+
+function LeftSideBar({handleSection}) {
+    return <div className="flex flex-col border border-gray-500 items-center justify-around h-screen w-[27%] gap-5 sticky bottom-0 left-0"> 
+      <SiteIcon />  
+      <SectionTab handleSection={handleSection} />
+      <AccountSwitchTab />
+    </div>
+
+}
+
+export default LeftSideBar;

@@ -4,7 +4,7 @@ import PostOptionsTab from "./PostOptionsTab";
 function CenterSection() {
     const [forYou, setForYou] = useState(true);
 
-    return <div className="w-[45%]">
+    return <div className="w-[45%] absolute top-0 left-[27%] overflow-auto">
         <div className="flex justify-around items-center my-5 h-15 font-bold">
             <h1 
                 className={`${forYou ? 'text-white' : 'text-gray-500'} cursor-pointer`} 

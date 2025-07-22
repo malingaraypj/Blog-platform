@@ -4,33 +4,34 @@ import {
 } from "react-icons/io5";
 import { CgMoreO } from "react-icons/cg";
 
-function SectionTab() {
+function SectionTab({handleSection}) {
+
     const options = {
-        Home: {
+        home: {
             icon: <IoHomeSharp color="white" size={30}/>,
             label: 'Home',
         },
-        Explore: {
+        explore: {
             icon: <IoSearchSharp  color="white" size={30}/>,
             label: 'Explore',
         },
-        Notification: {
+        notification: {
             icon: <IoNotificationsSharp color="white" size={30} />,
             label: 'Notification',
         },
-        Messages: {
+        messages: {
             icon: <IoChatbubblesSharp color="white" size={30}/>,  
             label: 'Messages',
         },
-        Communities: {
+        communities: {
             icon: <IoPeopleSharp color="white" size={30}/>,   
             label: 'Communities',
         },
-        Profile: {
+        profile: {
             icon: <IoSettingsSharp color="white" size={30}/>,
             label: 'Profile',
         },
-        More: {
+        more: {
             icon: <CgMoreO color="white" size={30}/>,
             label: 'More',
         },
@@ -38,7 +39,7 @@ function SectionTab() {
     return <div className="w-full flex flex-col gap-10 justify-center items-center">
         <ul className="flex flex-col gap-5 w-[40%]">
             {Object.keys(options).map((key) => (
-                <li key={key} className="flex items-center gap-4 hover:bg-gray-900 rounded-full cursor-pointer">
+                <li onClick={()=> handleSection(key)} key={key} className="flex items-center gap-4 hover:bg-gray-900 rounded-full cursor-pointer">
                     {options[key].icon}
                     <span className="text-xl">{options[key].label}</span>
                 </li>
