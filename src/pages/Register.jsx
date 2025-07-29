@@ -1,7 +1,8 @@
 import { useState } from "react";
 import SiteIcon from "../components/others/SiteIcon";
 import Input from "../utils/Input";
-import axios from "axios";
+import { useRegister } from "../Hooks/useRegister";
+import { Navigate } from "react-router";
 
 function Register() {
   const [password, setPassword] = useState({
@@ -13,13 +14,8 @@ function Register() {
     isEdited: false,
   });
   const [passwordMatchError, setPasswordMatchError] = useState(false);
-
-  const [backendErrors, setBackendErrors] = useState(null);
-  const [validationErrors, setValidationErrors] = useState({
-    name: "",
-    password: "",
-    dob: "",
-  });
+  const { backendErrors, validationErrors, registerSuccess, registerUser } =
+    useRegister();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,33 +28,9 @@ function Register() {
       return;
     }
 
-    try {
-      const userData = {
-        username: data.name,
-        email: data.email,
-        password: data.password,
-        confirmPassword: data.confirmpassword,
-        DOB: data.dob,
-      };
-
-      const url = import.meta.env.VITE_BACKEND_URL;
-      const response = await axios.post(`${url}/auth/register`, userData);
-
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-
-      if (error.response.data?.validationError) {
-        setValidationErrors({
-          name: error.response.data?.errors?.username,
-          password: error.response.data?.errors?.password,
-          dob: error.response.data?.errors?.DOB,
-        });
-        return;
-      }
-      if (error.response.data?.message) {
-        setBackendErrors(error.response.data?.message);
-      }
+    await registerUser(data);
+    if (registerSuccess) {
+      Navigate("/login");
     }
 
     e.target.reset();
@@ -73,7 +45,6 @@ function Register() {
     if (event.target.id === "confirmpassword") {
       setPasswordMatchError(false);
     }
-    setBackendErrors(null);
   };
 
   const handleOnBlur = () => {
