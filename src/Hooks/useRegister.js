@@ -26,7 +26,8 @@ export const useRegister = () => {
       const url = import.meta.env.VITE_BACKEND_URL;
       const response = await axios.post(`${url}/auth/register`, userData);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
+        console.log("created");
         setRegisterSuccess(true);
       }
     } catch (error) {
@@ -44,6 +45,7 @@ export const useRegister = () => {
         setBackendErrors(error.response.data?.message);
       }
     }
+    setIsSubmitting(false);
   };
 
   return {
@@ -51,6 +53,8 @@ export const useRegister = () => {
     validationErrors,
     isSubmitting,
     registerSuccess,
+    setBackendErrors,
+    setValidationErrors,
     registerUser,
   };
 };

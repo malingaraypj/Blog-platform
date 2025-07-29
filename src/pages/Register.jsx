@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SiteIcon from "../components/others/SiteIcon";
 import Input from "../utils/Input";
 import { useRegister } from "../Hooks/useRegister";
-import { Navigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 
 function Register() {
   const [password, setPassword] = useState({
@@ -14,8 +14,23 @@ function Register() {
     isEdited: false,
   });
   const [passwordMatchError, setPasswordMatchError] = useState(false);
-  const { backendErrors, validationErrors, registerSuccess, registerUser } =
-    useRegister();
+
+  const navigate = useNavigate();
+
+  const {
+    backendErrors,
+    setBackendErrors,
+    setValidationErrors,
+    validationErrors,
+    registerSuccess,
+    registerUser,
+  } = useRegister();
+
+  useEffect(() => {
+    if (registerSuccess) {
+      navigate("/login");
+    }
+  }, [registerSuccess, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,9 +44,6 @@ function Register() {
     }
 
     await registerUser(data);
-    if (registerSuccess) {
-      Navigate("/login");
-    }
 
     e.target.reset();
 
@@ -45,6 +57,12 @@ function Register() {
     if (event.target.id === "confirmpassword") {
       setPasswordMatchError(false);
     }
+    setBackendErrors(null);
+    setValidationErrors({
+      name: "",
+      password: "",
+      dob: "",
+    });
   };
 
   const handleOnBlur = () => {
@@ -151,6 +169,16 @@ function Register() {
                   >
                     Reset
                   </button>
+                </div>
+              </div>
+              <div className="flex justify-center items-center">
+                <div>
+                  <p>
+                    Already have an account?{" "}
+                    <Link className="text-blue-500 cursor-pointer" to="/login">
+                      Login
+                    </Link>
+                  </p>
                 </div>
               </div>
             </div>
