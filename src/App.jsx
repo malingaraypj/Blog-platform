@@ -1,6 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
-import PostProvider from "./contexts/postContext";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 
@@ -11,11 +10,7 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
-  return (
-    <PostProvider>
-      <RouterProvider router={router} />;
-    </PostProvider>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
