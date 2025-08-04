@@ -3,7 +3,6 @@ import dummyImg from "../../assets/image.png";
 import PostReactionOption from "./PostReactionOption";
 
 function PostItem({ data }) {
-  console.log(data._id);
   return (
     <div className=" bg-gray-900 rounded-xl p-3 m-5">
       <PostUserProfile data={data} />
