@@ -1,10 +1,13 @@
 function PostUserProfile({ data }) {
+  console.log(data);
   return (
     <div className="w-full h-12 flex gap-2 items-center">
       <div className="w-12 h-12 rounded-full overflow-clip">
         <img
           className="w-full"
-          src={`${import.meta.env.VITE_BACKEND_PUBLIC_URL}/images/my_photo.jpg`}
+          src={`${
+            import.meta.env.VITE_BACKEND_PUBLIC_URL
+          }/images/default_profile.jpg`}
           alt="user profile photo"
         />
       </div>

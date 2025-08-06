@@ -1,10 +1,17 @@
 import PostUserProfile from "./PostUserProfile";
 import dummyImg from "../../assets/image.png";
 import PostReactionOption from "./PostReactionOption";
+import { useNavigate } from "react-router";
 
 function PostItem({ data }) {
+  const navigate = useNavigate();
   return (
-    <div className=" bg-gray-900 rounded-xl p-3 m-5">
+    <div
+      onClick={() => {
+        navigate(`/${data._id}`);
+      }}
+      className=" bg-gray-900 rounded-xl p-3 m-5"
+    >
       <PostUserProfile data={data} />
       {/* Content */}
       <div>

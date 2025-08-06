@@ -6,7 +6,7 @@ function FollowRecommendation() {
   const [limit, setlimit] = useState(10);
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["follow suggestion"],
-    queryFn: ({ signal }) => getFollowSuggestions(signal, limit),
+    queryFn: () => getFollowSuggestions(limit),
   });
   console.log(data);
   return (

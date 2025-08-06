@@ -10,7 +10,7 @@ function Home() {
 
   const { data, isError, error, isLoading } = useQuery({
     queryKey: ["posts", followingPost],
-    queryFn: ({ signal }) => getAllPosts(signal, followingPost),
+    queryFn: () => getAllPosts(followingPost),
   });
 
   const toggleFeed = (val) => {
