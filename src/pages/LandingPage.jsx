@@ -10,7 +10,10 @@ function LandingPage() {
   return (
     <div className="flex h-screen overflow-hidden w-full">
       <LeftSideBar handleSection={setActiveSection} />
-      <CenterSection activeSection={activeSection} />
+      <CenterSection
+        activeSection={activeSection}
+        handleSection={setActiveSection}
+      />
       <RightSideBar />
     </div>
   );

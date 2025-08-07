@@ -1,3 +1,4 @@
+import UserProfile from "../profile/UserProfile";
 import Home from "./Home";
 
 function CenterSection({ activeSection }) {
@@ -8,7 +9,7 @@ function CenterSection({ activeSection }) {
       {activeSection === "notification" && <div>Notification</div>}
       {activeSection === "messages" && <div>Messages</div>}
       {activeSection === "communities" && <div>Communities</div>}
-      {activeSection === "profile" && <div>Profile</div>}
+      {activeSection === "profile" && <UserProfile />}
       {activeSection === "more" && <div>More</div>}
     </div>
   );
