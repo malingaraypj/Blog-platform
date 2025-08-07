@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllPosts } from "../../http";
+import { getAllPosts } from "../../api/post";
 import PostItem from "./PostItem";
-import { queryClient } from "../../http";
+import { queryClient } from "../../api/post";
 import Loading from "../../utils/Loading";
 
 function Home() {

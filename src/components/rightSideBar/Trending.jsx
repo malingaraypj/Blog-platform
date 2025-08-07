@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import TrendingItem from "./TrendingItem";
-import { getTrendingHashtags } from "../../http";
+import { getTrendingHashtags } from "../../api/post";
 import Loading from "../../utils/Loading";
 import { useState } from "react";
 

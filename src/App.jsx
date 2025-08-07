@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import LandingPage from "./pages/LandingPage";
 import { ModalProvider } from "./contexts/modelContext";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "./http";
+import { queryClient } from "./api/post";
 import PostDetails from "./components/center/PostDetails";
 
 const router = createBrowserRouter([

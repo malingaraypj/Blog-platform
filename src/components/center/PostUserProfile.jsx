@@ -1,5 +1,4 @@
 function PostUserProfile({ data }) {
-  console.log(data);
   return (
     <div className="w-full h-12 flex gap-2 items-center">
       <div className="w-12 h-12 rounded-full overflow-clip">
