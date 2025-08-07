@@ -11,7 +11,6 @@ function FollowRecommendation() {
   if (isLoading) {
     return <Loading />;
   }
-  console.log(data);
   return (
     <div className="border border-gray-400 mx-5 my-5 p-5 rounded-lg h-110 flex flex-col justify-start overflow-auto gap-5 cursor-pointer">
       <h1 className="text-lg font-bold">Whom to follow</h1>

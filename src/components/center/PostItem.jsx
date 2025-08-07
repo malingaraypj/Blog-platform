@@ -10,7 +10,7 @@ function PostItem({ data }) {
       onClick={() => {
         navigate(`/${data._id}`);
       }}
-      className=" bg-gray-900 rounded-xl p-3 m-5"
+      className=" bg-gray-900 rounded-xl p-3 m-5 hover:scale-105 transition-all duration-200 cursor-pointer"
     >
       <PostUserProfile data={data} />
       {/* Content */}

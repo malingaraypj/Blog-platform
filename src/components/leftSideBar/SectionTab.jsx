@@ -3,38 +3,19 @@ import Modal from "../../utils/modal";
 import NewPost from "../center/NewPost";
 import TabOption from "./TabOption";
 
-function SectionTab({ handleSection }) {
+function SectionTab() {
   const [openedModal, setopenedModal] = useState("");
   return (
     <>
       <div className="w-full flex flex-col justify-between items-center">
         {/* Tabs */}
         <div className="flex flex-col gap-3 w-[50%] items-center justify-between py-3">
-          <TabOption
-            handleOnClick={() => handleSection("home")}
-            iconLabel="home"
-          />
-          <TabOption
-            handleOnClick={() => handleSection("explore")}
-            iconLabel="explore"
-          />
-          <TabOption
-            handleOnClick={() => handleSection("notification")}
-            iconLabel="notification"
-          />
-          <TabOption
-            handleOnClick={() => handleSection("messages")}
-            iconLabel="messages"
-          />
-
-          <TabOption
-            handleOnClick={() => handleSection("profile")}
-            iconLabel="profile"
-          />
-          <TabOption
-            handleOnClick={() => handleSection("more")}
-            iconLabel="more"
-          />
+          <TabOption Iconlabel="home" />
+          <TabOption Iconlabel="explore" />
+          <TabOption Iconlabel="notification" />
+          <TabOption Iconlabel="messages" />
+          <TabOption Iconlabel="profile" />
+          <TabOption Iconlabel="more" />
         </div>
 
         {/* Post Button */}

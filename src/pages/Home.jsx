@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllPosts } from "../../api/post";
-import PostItem from "./PostItem";
-import { queryClient } from "../../api/post";
-import Loading from "../../utils/Loading";
+import { getAllPosts } from "../api/post";
+import PostItem from "../components/center/PostItem";
+import { queryClient } from "../api/post";
+import Loading from "../utils/Loading";
 
 function Home() {
   const [followingPost, setFollowingPost] = useState(true);

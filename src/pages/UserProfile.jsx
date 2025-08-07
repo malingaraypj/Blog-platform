@@ -1,8 +1,8 @@
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
-import ProfilePicture from "./ProfilePicture";
-import UserData from "./UserData";
-import UserOptions from "./UserOptions";
+import ProfilePicture from "../components/profile/ProfilePicture";
+import UserData from "../components/profile/UserData";
+import UserOptions from "../components/profile/UserOptions";
 
 function UserProfile() {
   return (

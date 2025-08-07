@@ -5,7 +5,7 @@ function ProfilePicture() {
   const fileInputRef = useRef(null);
 
   const handleClick = () => {
-    fileInputRef.current.click(); // Trigger file input when div is clicked
+    fileInputRef.current.click();
   };
 
   const handleFileChange = (e) => {

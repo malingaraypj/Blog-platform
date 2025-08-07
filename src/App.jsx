@@ -1,11 +1,18 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import LandingPage from "./pages/LandingPage";
 import { ModalProvider } from "./contexts/modelContext";
 import { QueryClientProvider } from "@tanstack/react-query";
+
 import { queryClient } from "./api/post";
+
+// Importing pages
 import PostDetails from "./components/center/PostDetails";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+
+//importing landing page and ites childrens
+import LandingPage from "./pages/LandingPage";
+import Home from "./pages/Home";
+import UserProfile from "./pages/UserProfile";
 
 const router = createBrowserRouter([
   { path: "/register", element: <Register /> },
@@ -13,6 +20,14 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <LandingPage />,
+    children: [
+      { path: "home", element: <Home /> },
+      { path: "explore", element: <div>Explore...</div> },
+      { path: "notification", element: <div>Notifications...</div> },
+      { path: "messages", element: <div>Messages...</div> },
+      { path: "profile", element: <UserProfile /> },
+      { path: "more", element: <div>More...</div> },
+    ],
   },
   { path: "/:postId", element: <PostDetails /> },
 ]);

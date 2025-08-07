@@ -7,6 +7,7 @@ import {
   IoSettingsSharp,
 } from "react-icons/io5";
 import { CgMoreO } from "react-icons/cg";
+import { NavLink } from "react-router";
 
 const IconsOptions = {
   home: IoHomeSharp,
@@ -18,18 +19,24 @@ const IconsOptions = {
   more: CgMoreO,
 };
 
-function TabOption({ iconLabel, handleOnClick }) {
-  const Icon = IconsOptions[iconLabel];
+function TabOption({ Iconlabel }) {
+  const Icon = IconsOptions[Iconlabel];
+
+  const baseClass =
+    "flex items-center gap-4 w-full rounded-full cursor-pointer px-1 py-2 transition-colors";
+  const activeClass = "bg-gray-800 font-semibold text-white";
+  const inactiveClass = "hover:bg-gray-900 text-white";
 
   return (
-    <div
-      onClick={handleOnClick}
-      className="flex items-center gap-4 hover:bg-gray-900 w-full rounded-full cursor-pointer px-1 py-2 transition-colors"
+    <NavLink
+      to={`/${Iconlabel}`}
+      className={({ isActive }) =>
+        `${baseClass} ${isActive ? activeClass : inactiveClass}`
+      }
     >
-      <Icon color="white" size={30} />
-
-      <span className="text-xl capitalize">{iconLabel}</span>
-    </div>
+      <Icon size={30} />
+      <span className="text-xl capitalize">{Iconlabel}</span>
+    </NavLink>
   );
 }
 
