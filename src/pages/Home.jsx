@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllPosts } from "../api/post";
 import PostItem from "../components/center/PostItem";
-import { queryClient } from "../api/post";
+import { queryClient } from "../api/helper";
 import Loading from "../utils/Loading";
 
 function Home() {

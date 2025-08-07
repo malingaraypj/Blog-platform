@@ -15,10 +15,6 @@ function Trending() {
     setlimit(20);
   };
 
-  // const closeReadMore = () => {
-  //   setlimit(5);
-  // }
-
   if (isLoading) {
     return <Loading />;
   }
@@ -26,7 +22,7 @@ function Trending() {
     console.log(error);
   }
   return (
-    <div className="border border-gray-400 mx-5 my-5 p-5 rounded-lg h-110 flex flex-col justify-between overflow-auto">
+    <div className="border border-gray-400 mx-5 my-5 p-5 rounded-lg h-110 flex flex-col justify-start gap-3 overflow-auto">
       <h1 className="text-lg font-bold">What's happening?</h1>
       {data &&
         data.length > 0 &&

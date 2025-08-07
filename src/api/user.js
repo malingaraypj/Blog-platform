@@ -14,3 +14,8 @@ export const followUser = async ({ userId }) => {
   const url = `${baseUrl}/users/startFollowing/${userId}`;
   return await patchData(url);
 };
+
+export const getMe = async () => {
+  const url = `${baseUrl}/users/getMe`;
+  return await getData(url);
+};

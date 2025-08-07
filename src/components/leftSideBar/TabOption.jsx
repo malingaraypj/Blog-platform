@@ -23,13 +23,13 @@ function TabOption({ Iconlabel }) {
   const Icon = IconsOptions[Iconlabel];
 
   const baseClass =
-    "flex items-center gap-4 w-full rounded-full cursor-pointer px-1 py-2 transition-colors";
+    "flex items-center gap-4 w-full rounded-xl cursor-pointer px-3 py-2 transition-colors";
   const activeClass = "bg-gray-800 font-semibold text-white";
   const inactiveClass = "hover:bg-gray-900 text-white";
 
   return (
     <NavLink
-      to={`/${Iconlabel}`}
+      to={`${Iconlabel}`}
       className={({ isActive }) =>
         `${baseClass} ${isActive ? activeClass : inactiveClass}`
       }

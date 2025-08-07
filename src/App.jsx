@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ModalProvider } from "./contexts/modelContext";
 import { QueryClientProvider } from "@tanstack/react-query";
 
-import { queryClient } from "./api/post";
+import { queryClient } from "./api/helper";
 
 // Importing pages
 import PostDetails from "./components/center/PostDetails";
@@ -15,12 +15,13 @@ import Home from "./pages/Home";
 import UserProfile from "./pages/UserProfile";
 
 const router = createBrowserRouter([
-  { path: "/register", element: <Register /> },
+  { path: "/", element: <Register /> },
   { path: "/login", element: <Login /> },
   {
-    path: "/",
+    path: "/app",
     element: <LandingPage />,
     children: [
+      { index: true, element: <Home /> },
       { path: "home", element: <Home /> },
       { path: "explore", element: <div>Explore...</div> },
       { path: "notification", element: <div>Notifications...</div> },

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Myposts from "./myPosts";
 
 function UserOptions() {
   const [activeTab, setActiveTab] = useState("posts");
@@ -42,15 +43,7 @@ function UserOptions() {
 
       {/* Tab Content */}
       <div className="mt-4">
-        {activeTab === "posts" && (
-          <div>
-            Posts Content Here Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Eveniet cum adipisci nihil autem magni corporis,
-            perferendis quos ea numquam tempora laboriosam asperiores nobis
-            veritatis delectus mollitia neque officia excepturi cupiditate velit
-            ipsa.
-          </div>
-        )}
+        {activeTab === "posts" && <Myposts />}
         {activeTab === "replies" && <div>Replies Content Here</div>}
         {activeTab === "likes" && <div>Replies Content Here</div>}
         {activeTab === "follow" && <div>Replies Content Here</div>}

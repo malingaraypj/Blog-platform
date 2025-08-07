@@ -10,7 +10,7 @@ function Login() {
 
   useEffect(() => {
     if (loginSuccess) {
-      navigate("/");
+      navigate("/app");
     }
   }, [loginSuccess, navigate]);
 
@@ -48,7 +48,7 @@ function Login() {
           <div className="flex justify-between items-center">
             <p>
               Don't have an account?{" "}
-              <Link className="text-blue-500 cursor-pointer" to="/register">
+              <Link className="text-blue-500 cursor-pointer" to="/">
                 Register
               </Link>
             </p>
