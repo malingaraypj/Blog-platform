@@ -29,10 +29,12 @@ function PostItem({ data }) {
       {/* Content */}
       <div
         onClick={() => {
-          navigate(`/${data._id}`);
+          navigate(`/app/${data._id}`);
         }}
+        className="w-full flex flex-col justify-start items-start gap-2 overflow-clip"
       >
-        <p className="text-sm">{data.content}</p>
+        <p className="text-sm line-clamp-3">{data.content}</p>
+
         <img src={dummyImg} alt="post image" />
       </div>
       <PostReactionOption

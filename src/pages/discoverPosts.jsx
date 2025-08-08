@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getDiscoverPosts } from "../api/post";
 import PostDisplayWrapper from "../components/center/PostDisplayWrapper";
 import Loading from "../utils/Loading";
+import { Outlet } from "react-router";
 
 function DiscoverPosts() {
   const { data, isLoading } = useQuery({
@@ -19,7 +20,12 @@ function DiscoverPosts() {
     );
   }
 
-  return <PostDisplayWrapper data={data} />;
+  return (
+    <>
+      <PostDisplayWrapper data={data} />
+      <Outlet />
+    </>
+  );
 }
 
 export default DiscoverPosts;

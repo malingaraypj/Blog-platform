@@ -29,8 +29,14 @@ const router = createBrowserRouter([
         element: <Home />,
         children: [
           { index: true, element: <DiscoverPosts /> },
-          { path: "discover", element: <DiscoverPosts /> },
-          { path: "following", element: <FollowingPosts /> },
+          {
+            path: "discover",
+            element: <DiscoverPosts />,
+          },
+          {
+            path: "following",
+            element: <FollowingPosts />,
+          },
         ],
       },
       { path: "explore", element: <div>Explore...</div> },
@@ -38,9 +44,11 @@ const router = createBrowserRouter([
       { path: "messages", element: <div>Messages...</div> },
       { path: "profile", element: <UserProfile /> },
       { path: "more", element: <div>More...</div> },
+
+      // global post details route
+      { path: ":postId", element: <PostDetails /> },
     ],
   },
-  { path: "/:postId", element: <PostDetails /> },
 ]);
 
 const App = () => {
