@@ -13,6 +13,8 @@ import Login from "./pages/Login";
 import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import UserProfile from "./pages/UserProfile";
+import DiscoverPosts from "./pages/discoverPosts";
+import FollowingPosts from "./pages/FollowingPosts";
 
 const router = createBrowserRouter([
   { path: "/", element: <Register /> },
@@ -22,7 +24,15 @@ const router = createBrowserRouter([
     element: <LandingPage />,
     children: [
       { index: true, element: <Home /> },
-      { path: "home", element: <Home /> },
+      {
+        path: "home",
+        element: <Home />,
+        children: [
+          { index: true, element: <DiscoverPosts /> },
+          { path: "discover", element: <DiscoverPosts /> },
+          { path: "following", element: <FollowingPosts /> },
+        ],
+      },
       { path: "explore", element: <div>Explore...</div> },
       { path: "notification", element: <div>Notifications...</div> },
       { path: "messages", element: <div>Messages...</div> },

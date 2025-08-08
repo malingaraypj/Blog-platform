@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getMyPosts } from "../../api/post";
 import Loading from "../../utils/Loading";
-import PostItem from "../center/PostItem";
+import PostDisplayWrapper from "../center/PostDisplayWrapper";
 
 function Myposts() {
   const { data, isLoading } = useQuery({
@@ -12,17 +12,7 @@ function Myposts() {
     return <Loading />;
   }
 
-  return (
-    <div>
-      {!data ||
-        (data.length === 0 && (
-          <p className="text-center text-gray-500">No posts available</p>
-        ))}
-      {data &&
-        data.length > 0 &&
-        data.map((post) => <PostItem key={post._id} data={post} />)}
-    </div>
-  );
+  return <PostDisplayWrapper data={data} />;
 }
 
 export default Myposts;

@@ -4,16 +4,19 @@ import { getData, patchData } from "./helper";
 // Base URL for all requests
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
-// Post-related API functions
-export const getAllPosts = async (followingPosts = false) => {
-  const endpoint = followingPosts ? "followingPosts" : "";
-  const url = `${baseUrl}/post/${endpoint}`;
-  console.debug("Fetching posts from:", url);
+export const getDiscoverPosts = async () => {
+  const url = `${baseUrl}/post/`;
+
   return await getData(url);
 };
 
 export const getMyPosts = async () => {
   const url = `${baseUrl}/post/myPosts`;
+  return await getData(url);
+};
+
+export const getFollowingPosts = async () => {
+  const url = `${baseUrl}/post/followingPosts`;
   return await getData(url);
 };
 
