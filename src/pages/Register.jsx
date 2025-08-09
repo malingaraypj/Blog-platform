@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import SiteIcon from "../components/others/SiteIcon";
-import Input from "../utils/Input";
+// import Input from "../utils/Input";
+import { Input } from "@/components/ui/input";
 import { useRegister } from "../Hooks/useRegister";
 import { Link, useNavigate } from "react-router";
+import { Button } from "@/components/ui/button";
+import { DobPicker } from "@/components/ui/dob_picker";
 
 function Register() {
   const [password, setPassword] = useState({ value: "", isEdited: false });
@@ -77,7 +80,7 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-8 text-white">
       <div className="bg-gray-800 w-full max-w-3xl rounded-xl shadow-lg p-8 sm:p-12 space-y-8">
         {/* Logo */}
         <div className="flex justify-center">
@@ -138,34 +141,15 @@ function Register() {
 
           {/* DOB + Buttons */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-            <div className="flex flex-col w-full sm:w-auto">
-              <label
-                htmlFor="dob"
-                className="text-sm font-medium text-gray-300 mb-1"
-              >
-                Date of Birth
-              </label>
-              <Input
-                type="date"
-                id="dob"
-                error={validationErrors.dob}
-                className="w-full sm:w-56"
-              />
-            </div>
+            <DobPicker />
 
             <div className="flex gap-4 w-full sm:w-auto">
-              <button
-                type="submit"
-                className="flex-1 sm:flex-none bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 hover:scale-105 transition-transform duration-200"
-              >
+              <Button type="submit" variant="ghost" className="bg-blue-500">
                 Submit
-              </button>
-              <button
-                type="reset"
-                className="flex-1 sm:flex-none bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 hover:scale-105 transition-transform duration-200"
-              >
+              </Button>
+              <Button type="reset" variant="ghost" className="bg-blue-500">
                 Reset
-              </button>
+              </Button>
             </div>
           </div>
 

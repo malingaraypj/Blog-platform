@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import SiteIcon from "../components/others/SiteIcon";
-import Input from "../utils/Input";
+// import Input from "../utils/Input";
+import { Input } from "@/components/ui/input";
 import { useLogin } from "../Hooks/useLogin";
 import { useEffect } from "react";
 
