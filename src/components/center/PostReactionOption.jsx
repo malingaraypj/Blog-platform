@@ -1,7 +1,8 @@
-import { AiOutlineLike, AiOutlineComment } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import { HiOutlineShare } from "react-icons/hi";
+import ReplyPost from "./ReplyPost";
 
 function PostReactionOption({ data, handleInteractions }) {
   return (
@@ -22,12 +23,9 @@ function PostReactionOption({ data, handleInteractions }) {
         <BiRepost size={20} />
         <span>{data.retweets_count}</span>
       </div>
-      <div
-        onClick={() => handleInteractions("reply")}
-        className="flex items-center gap-1 cursor-pointer hover:text-purple-500"
-      >
-        <AiOutlineComment size={20} />
+      <div className="flex items-center gap-1 cursor-pointer hover:text-purple-500">
         <span>{data.reply_count}</span>
+        <ReplyPost onClick={() => handleInteractions("replyPost")} />
       </div>
       <div
         onClick={() => handleInteractions("share")}

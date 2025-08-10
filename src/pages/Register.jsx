@@ -42,6 +42,8 @@ function Register() {
       return;
     }
 
+    console.log(data);
+
     await registerUser(data);
     e.target.reset();
     setConfirmPassword({ isEdited: false, value: "" });

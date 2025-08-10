@@ -24,9 +24,9 @@ export function DobPicker() {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
-            variant="outline"
+            variant="ghost"
             id="date"
-            className="w-48 text-black text-md justify-between font-normal"
+            className="w-48 text-white text-md justify-between font-normal"
           >
             {date ? date.toLocaleDateString() : "Select date"}
             <ChevronDownIcon />

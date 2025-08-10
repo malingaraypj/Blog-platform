@@ -23,8 +23,8 @@ function Login() {
     await loginUser(data);
   };
   return (
-    <div className="w-svw h-svh bg-gray-800 py-20">
-      <div className="bg-black w-[60%]  mx-auto p-10 rounded-lg shadow-gray-800 shadow-2xl">
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-8 text-white">
+      <div className="bg-gray-800 w-full max-w-3xl rounded-xl shadow-lg p-8 sm:p-12 space-y-8">
         <SiteIcon />
         {backendError && (
           <p className="text-red-600 text-sm text-center">{backendError}</p>
