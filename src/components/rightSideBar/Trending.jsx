@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import TrendingItem from "./TrendingItem";
 import { getTrendingHashtags } from "../../api/post";
-import Loading from "../../utils/Loading";
 import { useState } from "react";
+import { LoaderFive } from "../ui/loader";
 
 function Trending() {
   const [limit, setlimit] = useState(5);
@@ -16,7 +16,7 @@ function Trending() {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return <LoaderFive />;
   }
   if (isError) {
     console.log(error);

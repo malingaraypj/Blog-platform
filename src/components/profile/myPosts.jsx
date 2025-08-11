@@ -1,17 +1,17 @@
-import { useQuery } from "@tanstack/react-query";
 import { getMyPosts } from "../../api/post";
-import Loading from "../../utils/Loading";
 import PostDisplayWrapper from "../center/PostDisplayWrapper";
+import { LoaderOne } from "../ui/loader";
+import { useGetPost } from "@/Hooks/post/useGetPost";
 
 function Myposts() {
-  const { data, isLoading } = useQuery({
-    queryKey: ["post", "myposts"],
-    queryFn: getMyPosts,
-  });
+  const { data, isLoading } = useGetPost(getMyPosts, ["myPosts"]);
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div className="flex justify-center items-center">
+        <LoaderOne />;
+      </div>
+    );
   }
-
   return <PostDisplayWrapper data={data} />;
 }
 

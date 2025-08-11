@@ -18,7 +18,9 @@ export const useLogin = () => {
       const response = await axios.post(`${url}/auth/login`, userData);
 
       const token = response.data.token;
+      const userId = response.data.user._id;
       localStorage.setItem("token", token);
+      localStorage.setItem("loggedUser", userId);
 
       setloginSuccess(true);
       console.log(token);

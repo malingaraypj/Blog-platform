@@ -5,7 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./api/helper";
 
 // Importing pages
-import PostDetails from "./components/center/PostDetails";
+// import PostDetails from "./components/center/PostDetails";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       { path: "more", element: <div>More...</div> },
 
       // global post details route
-      { path: ":postId", element: <PostDetails /> },
+      { path: ":postId", element: <div>Post Details</div> },
     ],
   },
 ]);

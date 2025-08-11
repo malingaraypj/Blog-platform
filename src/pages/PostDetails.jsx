@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPostById } from "../api/post";
-import Loading from "../utils/Loading";
 import { useParams } from "react-router";
+import { LoaderFive } from "@/components/ui/loader";
 
 function PostDetails() {
   const { postId } = useParams();
@@ -12,7 +12,7 @@ function PostDetails() {
   });
 
   if (isLoading) {
-    return <Loading />;
+    return <LoaderFive />;
   }
 
   console.log(data);

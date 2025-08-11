@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getFollowSuggestions } from "../../api/user";
-import Loading from "../../utils/Loading";
 import FollowRecommendationCard from "./FollowRecommendationCard";
+import { LoaderFive } from "../ui/loader";
 
 function FollowRecommendation() {
   const { data, isLoading } = useQuery({
@@ -9,7 +9,7 @@ function FollowRecommendation() {
     queryFn: () => getFollowSuggestions(4),
   });
   if (isLoading) {
-    return <Loading />;
+    return <LoaderFive />;
   }
   return (
     <div className="border border-gray-400 mx-5 my-5 p-5 rounded-lg h-110 flex flex-col justify-start overflow-auto gap-5 cursor-pointer">

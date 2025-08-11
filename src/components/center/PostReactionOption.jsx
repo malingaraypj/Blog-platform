@@ -1,39 +1,63 @@
-import { AiOutlineLike } from "react-icons/ai";
+import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import { HiOutlineShare } from "react-icons/hi";
 import ReplyPost from "./ReplyPost";
+import { useToggleLike } from "@/Hooks/post/useToggleLiks";
+import { useState } from "react";
 
-function PostReactionOption({ data, handleInteractions }) {
+function PostReactionOption({ data }) {
+  const loggedUser = localStorage.getItem("loggedUser");
+
+  const { mutate } = useToggleLike();
+  const [isLiked, setIsLiked] = useState(
+    loggedUser && data?.likes ? data.likes.includes(loggedUser) : false
+  );
+
+  const handleLikeClick = () => {
+    const newLikeStatus = !isLiked;
+    setIsLiked(newLikeStatus);
+    mutate({
+      post_id: data._id,
+    });
+  };
+
   return (
     <div className="h-12 flex justify-between items-center px-4 text-gray-600 text-sm">
+      {/* Like */}
       <div
-        onClick={() => {
-          handleInteractions("like");
-        }}
-        className="flex items-center gap-1 cursor-pointer hover:text-blue-500"
+        onClick={handleLikeClick}
+        className={`flex items-center gap-1 cursor-pointer ${
+          isLiked ? "text-blue-500" : "hover:text-blue-500"
+        }`}
       >
-        <AiOutlineLike size={20} />
-        <span>{data.likes_count}</span>
+        {isLiked ? (
+          <AiFillLike size={20} className="text-blue-500" />
+        ) : (
+          <AiOutlineLike size={20} />
+        )}
+        <span>{data?.likes_count}</span>
       </div>
-      <div
-        onClick={() => handleInteractions("unlike")}
-        className="flex items-center gap-1 cursor-pointer hover:text-green-500"
-      >
+
+      {/* Retweet */}
+      <div className="flex items-center gap-1 cursor-pointer hover:text-green-500">
         <BiRepost size={20} />
-        <span>{data.retweets_count}</span>
+        <span>{data?.retweets_count}</span>
       </div>
+
+      {/* Reply */}
       <div className="flex items-center gap-1 cursor-pointer hover:text-purple-500">
-        <span>{data.reply_count}</span>
-        <ReplyPost onClick={() => handleInteractions("replyPost")} />
+        <span>{data?.reply_count || 0}</span>
+        <ReplyPost post_id={data?._id} />
       </div>
-      <div
-        onClick={() => handleInteractions("share")}
-        className="flex items-center gap-1 cursor-pointer hover:text-teal-500"
-      >
+
+      {/* Share */}
+      <div className="flex items-center gap-1 cursor-pointer hover:text-teal-500">
         <HiOutlineShare size={20} />
-        <span>100</span>
+        <span>{data?.shares_count || 0}</span>
       </div>
+
+      {/* Bookmark */}
       <div className="cursor-pointer hover:text-yellow-500">
         <CiBookmark size={20} />
       </div>

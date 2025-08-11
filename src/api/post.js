@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { getData, patchData } from "./helper";
+import { getData, patchData, postData } from "./helper";
 
 // Base URL for all requests
 const baseUrl = import.meta.env.VITE_BACKEND_URL;
@@ -34,17 +34,13 @@ export const getTrendingHashtags = async (limit) => {
   return await getData(url.toString());
 };
 
-// function to handle post interactions
-export const handlePostInteraction = async (postId, interactionType) => {
-  const interactions = {
-    like: "likePost",
-    unlike: "unlikePost",
-    retweet: "retweetPost",
-    reply: "replyPost",
-    share: "sharePost",
-    bookmark: "bookmarkPost",
-  };
+export const toggleLike = ({ post_id }) => {
+  const url = `${baseUrl}/post/likePost/${post_id}`;
 
-  const url = `${baseUrl}/post/${interactions[interactionType]}/${postId}`;
-  return await patchData(url);
+  return patchData(url);
+};
+
+export const replyPost = async (post_id, reply) => {
+  const url = `${baseUrl}/post/replyPost/${post_id}`;
+  return await postData(url, { content: reply });
 };

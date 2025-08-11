@@ -6,7 +6,7 @@ import UserOptions from "../components/profile/UserOptions";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getMe } from "../api/user";
-import Loading from "../utils/Loading";
+import { LoaderFive } from "@/components/ui/loader";
 
 function UserProfile() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function UserProfile() {
     refetchOnWindowFocus: true,
   });
   if (isLoading) {
-    return <Loading />;
+    return <LoaderFive />;
   }
   return (
     <div className="flex flex-col items-center justify-start p-5 h-screen overflow-auto scrollbar-hide">
