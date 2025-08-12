@@ -6,7 +6,6 @@ const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const getDiscoverPosts = async () => {
   const url = `${baseUrl}/post/`;
-
   return await getData(url);
 };
 

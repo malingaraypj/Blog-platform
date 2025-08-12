@@ -23,7 +23,6 @@ export const useLogin = () => {
       localStorage.setItem("loggedUser", userId);
 
       setloginSuccess(true);
-      console.log(token);
     } catch (error) {
       console.log(error.response.data.message);
       setbackendError(error.response.data.message);

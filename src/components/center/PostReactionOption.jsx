@@ -27,12 +27,15 @@ function PostReactionOption({ data }) {
       {/* Like */}
       <div
         onClick={handleLikeClick}
-        className={`flex items-center gap-1 cursor-pointer ${
-          isLiked ? "text-blue-500" : "hover:text-blue-500"
-        }`}
+        className={`flex items-center gap-1 cursor-pointer hover:${
+          isLiked ? "text-red-500" : "text-green-500"
+        } ${isLiked ? "text-red-500" : ""}`}
       >
         {isLiked ? (
-          <AiFillLike size={20} className="text-blue-500" />
+          <AiFillLike
+            size={20}
+            className={`${isLiked ? "text-red-500" : "hover:text-red-500"}`}
+          />
         ) : (
           <AiOutlineLike size={20} />
         )}
