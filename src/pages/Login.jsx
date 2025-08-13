@@ -1,33 +1,34 @@
 import { Link, useNavigate } from "react-router";
 import SiteIcon from "../components/others/SiteIcon";
-// import Input from "../utils/Input";
 import { Input } from "@/components/ui/input";
-import { useLogin } from "../Hooks/useLogin";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logInUser } from "@/store/auth/authActions";
 
 function Login() {
-  const { loginUser, backendError, isSubmitting, loginSuccess } = useLogin();
+  const loginStatus = useSelector((state) => state.auth.logInstatus);
+  const errorMsg = useSelector((state) => state.auth.errorMsg);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (loginSuccess) {
+    if (loginStatus == "success") {
       navigate("/app/home");
     }
-  }, [loginSuccess, navigate]);
+  }, [loginStatus, navigate]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const fd = new FormData(e.target);
     const data = Object.fromEntries(fd.entries());
-
-    await loginUser(data);
+    dispatch(logInUser({ email: data.email, password: data.password }));
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-8 text-white">
       <div className="bg-gray-800 w-full max-w-3xl rounded-xl shadow-lg p-8 sm:p-12 space-y-8">
         <SiteIcon />
-        {backendError && (
-          <p className="text-red-600 text-sm text-center">{backendError}</p>
+        {loginStatus == "error" && (
+          <p className="text-red-600 text-sm text-center">{errorMsg}</p>
         )}
         <form
           onSubmit={handleSubmit}
@@ -57,9 +58,9 @@ function Login() {
           <div className="flex justify-center items-center">
             <button
               className="bg-blue-500 text-white px-5 py-2 rounded-full"
-              disabled={isSubmitting}
+              disabled={loginStatus === "loading"}
             >
-              {isSubmitting ? "Logging in..." : "Login"}
+              {loginStatus === "loading" ? "Logging in..." : "Login"}
             </button>
           </div>
         </form>

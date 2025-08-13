@@ -26,9 +26,6 @@ export const getData = async (url) => {
       timeout: 10000, // 10 second timeout
     });
     const data = response.data.data;
-    // if(type ==='posts'){
-    //   return data.map(post=>)
-    // }
     return data;
   } catch (err) {
     const errorMessage =

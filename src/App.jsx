@@ -15,6 +15,7 @@ import Home from "./pages/Home";
 import UserProfile from "./pages/UserProfile";
 import DiscoverPosts from "./pages/discoverPosts";
 import FollowingPosts from "./pages/FollowingPosts";
+import PostDetails from "./pages/PostDetails";
 
 const router = createBrowserRouter([
   { path: "/", element: <Register /> },
@@ -46,7 +47,7 @@ const router = createBrowserRouter([
       { path: "more", element: <div>More...</div> },
 
       // global post details route
-      { path: ":postId", element: <div>Post Details</div> },
+      { path: ":postId", element: <PostDetails /> },
     ],
   },
 ]);
@@ -54,9 +55,7 @@ const router = createBrowserRouter([
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ModalProvider>
-        <RouterProvider router={router} />
-      </ModalProvider>
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 };

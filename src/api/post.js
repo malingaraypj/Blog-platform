@@ -1,4 +1,3 @@
-import { QueryClient } from "@tanstack/react-query";
 import { getData, patchData, postData } from "./helper";
 
 // Base URL for all requests
