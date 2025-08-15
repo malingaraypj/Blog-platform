@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { CgProfile } from "react-icons/cg";
+import { Button } from "../ui/button";
 
 function ProfilePicture() {
   const fileInputRef = useRef(null);
@@ -37,10 +38,14 @@ function ProfilePicture() {
         />
       </div>
 
-      <div className="w-full flex justify-end items-center h-18">
-        <button className="cursor-pointer bg-blue-500 px-5 py-3 rounded-lg text-white font-bold mr-5 hover:bg-blue-600 transition duration-300">
+      <div className="w-full flex justify-end items-center h-18 mt-5">
+        <Button
+          className="bg-blue-500 text-white hover:text-black"
+          variant="secondary"
+        >
           Edit profile
-        </button>
+        </Button>
+        {/* <EditUserProfile /> */}
       </div>
     </div>
   );

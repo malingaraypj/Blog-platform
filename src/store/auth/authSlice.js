@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+const savedUser = JSON.parse(localStorage.getItem("user"));
+const savedToken = localStorage.getItem("token");
+
 const initialState = {
-  user: null,
-  token: null,
+  user: savedUser || null,
+  token: savedToken || null,
   logInstatus: "idle", // idle, success, loading, error
-  isAuthenticated: false,
+  isAuthenticated: !!savedToken,
   errorMsg: "",
 };
 

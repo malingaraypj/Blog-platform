@@ -1,11 +1,8 @@
-import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router";
 
 function Home() {
   const activeClassName = "font-bold text-lg";
   const inactiveClassName = "text-gray-400";
-  const user = useSelector((state) => state.auth.user);
-  console.log(user);
 
   return (
     <div className="w-full p-4 min-h-screen flex flex-col justify-start">

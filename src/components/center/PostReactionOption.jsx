@@ -1,12 +1,11 @@
-import { AiOutlineLike, AiFillLike } from "react-icons/ai";
+import { AiOutlineLike, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import { HiOutlineShare } from "react-icons/hi";
-import ReplyPost from "./ReplyPost";
 import { useToggleLike } from "@/Hooks/post/useToggleLiks";
 import { useState } from "react";
 
-function PostReactionOption({ data }) {
+function PostReactionOption({ data, handleOpenReply }) {
   const loggedUser = localStorage.getItem("loggedUser");
 
   const { mutate } = useToggleLike();
@@ -49,9 +48,13 @@ function PostReactionOption({ data }) {
       </div>
 
       {/* Reply */}
-      <div className="flex items-center gap-1 cursor-pointer hover:text-purple-500">
+
+      <div
+        onClick={handleOpenReply}
+        className="flex items-center gap-1 cursor-pointer hover:text-teal-500"
+      >
+        <AiOutlineComment size={20} />
         <span>{data?.reply_count || 0}</span>
-        <ReplyPost post_id={data?._id} />
       </div>
 
       {/* Share */}

@@ -18,6 +18,7 @@ export const logInUser = ({ email, password }) => {
       dispatch(authActions.loginSuccess({ token, user }));
 
       localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
     } catch (error) {
       const errorMsg = error.response?.data?.message || "login failed";
       dispatch(authActions.loginFailed(errorMsg));

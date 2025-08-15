@@ -24,6 +24,11 @@ export const getPostById = async (postId) => {
   return await getData(url);
 };
 
+export const getReplyPosts = async (postId) => {
+  const url = `${baseUrl}/post/${postId}/replies`;
+  return await getData(url);
+};
+
 // Hashtag-related API functions
 export const getTrendingHashtags = async (limit) => {
   const url = new URL(`${baseUrl}/post/trendingHashtags`);
