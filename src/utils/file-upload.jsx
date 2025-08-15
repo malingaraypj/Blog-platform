@@ -1,11 +1,10 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FaRegImage, FaRegFileVideo } from "react-icons/fa6";
 
-function FileUploadInput({ type }) {
+function FileUploadInput({ type, onSelect }) {
   const fileRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileSelection = () => {
     fileRef.current?.click();
@@ -14,8 +13,7 @@ function FileUploadInput({ type }) {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      setSelectedFile(file);
-      console.log("Selected file:", file);
+      onSelect(file);
     }
   };
 

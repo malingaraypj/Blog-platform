@@ -1,7 +1,5 @@
-import Modal from "../../utils/modal";
-import NewPost from "../center/NewPost";
-import NewPostModal from "../center/NewPostModal";
 import TabOption from "./TabOption";
+import NewPostButton from "./NewPostButton";
 
 function SectionTab() {
   return (
@@ -16,9 +14,7 @@ function SectionTab() {
           <TabOption Iconlabel="profile" />
           <TabOption Iconlabel="more" />
         </div>
-
-        {/* Post Button */}
-        <NewPostModal />
+        <NewPostButton />
       </div>
     </>
   );

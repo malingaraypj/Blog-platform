@@ -46,9 +46,8 @@ export const postData = async (url, body = {}) => {
     const response = await axios.post(url, body, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
-      timeout: 10000,
+      timeout: 15000,
     });
     return response.data.data;
   } catch (err) {

@@ -43,7 +43,12 @@ export const toggleLike = ({ post_id }) => {
   return patchData(url);
 };
 
-export const replyPost = async (post_id, reply) => {
+export const replyPost = async ({ post_id, formData }) => {
   const url = `${baseUrl}/post/replyPost/${post_id}`;
-  return await postData(url, { content: reply });
+  return await postData(url, formData);
+};
+
+export const createPost = async (data) => {
+  const url = `${baseUrl}/post/newPost`;
+  return await postData(url, data);
 };

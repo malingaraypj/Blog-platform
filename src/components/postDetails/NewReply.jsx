@@ -14,6 +14,10 @@ import FileUploadInput from "@/utils/file-upload";
 import { Button } from "../ui/button";
 import { useReplyPost } from "@/Hooks/post/useReplyPost";
 
+import { useDispatch } from "react-redux";
+import { newPostActions } from "@/store/NewPost/newPost";
+import { useCreatePost } from "@/Hooks/post/useCreatePost";
+
 // Each icon mapped to a Unicode emoji equivalent
 const emojiOptions = [
   { icon: BsEmojiLaughingFill, label: "Laugh", char: "😂" },
@@ -29,9 +33,19 @@ const emojiOptions = [
   { icon: FaPaw, label: "Paw", char: "🐾" },
 ];
 
-function NewReply({ post_id, handleOpenReply, isDetail = false }) {
+function NewReply({
+  post_id,
+  handleOpenReply,
+  isDetail = false,
+  isNewPost = false,
+}) {
   const [replyText, setReplyText] = useState("");
+  const [mediaFiles, setMediaFiles] = useState([]);
+
   const { mutate } = useReplyPost();
+  const { mutate: newPostMutate, isPending: postPending } = useCreatePost();
+
+  const dispatch = useDispatch();
 
   const handleEmojiSelection = (emojiChar) => {
     setReplyText((prev) => prev + emojiChar + " ");
@@ -39,10 +53,33 @@ function NewReply({ post_id, handleOpenReply, isDetail = false }) {
 
   const handlePost = () => {
     if (!replyText.trim()) return;
-    mutate({ post_id, reply: replyText });
-    if (!isDetail) handleOpenReply();
+
+    const formData = new FormData();
+    formData.append("content", replyText);
+
+    mediaFiles.forEach((m) => {
+      if (m.type === "image") formData.append("image", m.file);
+      if (m.type === "video") formData.append("video", m.file);
+    });
+    if (isNewPost) {
+      newPostMutate(formData);
+    } else {
+      mutate({ post_id, formData });
+    }
+    if (!isDetail && !isNewPost) handleOpenReply();
 
     setReplyText("");
+  };
+
+  const handleOnBlur = () => {
+    if (!isNewPost) return; // Only trigger for new post mode
+    if (!replyText.trim()) {
+      dispatch(newPostActions.deactivate());
+    }
+  };
+
+  const handleFileSelection = (file, type) => {
+    setMediaFiles((prev) => [...prev, { file, type }]);
   };
 
   return (
@@ -52,11 +89,16 @@ function NewReply({ post_id, handleOpenReply, isDetail = false }) {
         <ProfileAvatar />
 
         <div className="flex flex-col flex-1 gap-2">
-          <p className="text-sm text-muted-foreground">Replying to @bcci</p>
+          <p className="text-sm text-muted-foreground">
+            {isNewPost ? "create new post" : "Replying to @bcci"}
+          </p>
 
           <Textarea
             className="text-base border-none resize-none focus-visible:ring-0 focus:outline-none flex-1 w-full"
-            placeholder="Place your reply..."
+            placeholder={
+              isNewPost ? "What's happening?" : "Place your reply..."
+            }
+            onBlur={handleOnBlur}
             value={replyText}
             onChange={(e) => setReplyText(e.target.value)}
           />
@@ -66,8 +108,14 @@ function NewReply({ post_id, handleOpenReply, isDetail = false }) {
       {/* Bottom action bar */}
       <div className="flex items-center justify-between px-5 py-3 border-t border-gray-600">
         <div className="flex items-center gap-3">
-          <FileUploadInput type="image" />
-          <FileUploadInput type="video" />
+          <FileUploadInput
+            type="image"
+            onSelect={(file) => handleFileSelection(file, "image")}
+          />
+          {/* <FileUploadInput
+            type="video"
+            onSelect={(file) => handleFileSelection(file, "video")}
+          /> */}
           <EmojiSelector
             emojiOptions={emojiOptions}
             onSelect={(emoji) => handleEmojiSelection(emoji.char)}
@@ -76,9 +124,9 @@ function NewReply({ post_id, handleOpenReply, isDetail = false }) {
 
         <Button
           onClick={handlePost}
-          className="bg-blue-500 hover:bg-blue-600 hover:scale-105 transition-transform"
+          className={`bg-blue-500 hover:bg-blue-600 hover:scale-105 transition-transform`}
         >
-          Post
+          {postPending ? "creating..." : "Post"}
         </Button>
       </div>
     </div>

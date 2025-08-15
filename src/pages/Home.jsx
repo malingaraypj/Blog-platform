@@ -1,6 +1,10 @@
+import NewReply from "@/components/postDetails/NewReply";
+import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router";
+import NewPost from "./NewPost";
 
 function Home() {
+  const postStatus = useSelector((state) => state.newpost.status);
   const activeClassName = "font-bold text-lg";
   const inactiveClassName = "text-gray-400";
 
@@ -24,6 +28,7 @@ function Home() {
           Following
         </NavLink>
       </div>
+      {postStatus === "active" && <NewPost />}
       <Outlet />
     </div>
   );
