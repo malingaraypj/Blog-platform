@@ -17,6 +17,7 @@ import { useReplyPost } from "@/Hooks/post/useReplyPost";
 import { useDispatch } from "react-redux";
 import { newPostActions } from "@/store/NewPost/newPost";
 import { useCreatePost } from "@/Hooks/post/useCreatePost";
+import AlertComponent from "@/utils/AlertComponent";
 
 // Each icon mapped to a Unicode emoji equivalent
 const emojiOptions = [
@@ -42,10 +43,12 @@ function NewReply({
   const [replyText, setReplyText] = useState("");
   const [mediaFiles, setMediaFiles] = useState([]);
 
-  const { mutate } = useReplyPost();
-  const { mutate: newPostMutate, isPending: postPending } = useCreatePost();
-
   const dispatch = useDispatch();
+
+  // to mutate the replies of a post
+  const { mutate } = useReplyPost();
+  // to create a new post.
+  const { mutate: newPostMutate, isPending: postPending } = useCreatePost();
 
   const handleEmojiSelection = (emojiChar) => {
     setReplyText((prev) => prev + emojiChar + " ");
@@ -66,7 +69,7 @@ function NewReply({
     } else {
       mutate({ post_id, formData });
     }
-    if (!isDetail && !isNewPost) handleOpenReply();
+    if (!isDetail && !isNewPost) handleOpenReply(); // opening and closing of newReply component, should not be in postDetail page
 
     setReplyText("");
   };
@@ -79,7 +82,9 @@ function NewReply({
   };
 
   const handleFileSelection = (file, type) => {
-    setMediaFiles((prev) => [...prev, { file, type }]);
+    setMediaFiles((prev) => {
+      return [...prev, { file, type }];
+    });
   };
 
   return (
@@ -129,6 +134,7 @@ function NewReply({
           {postPending ? "creating..." : "Post"}
         </Button>
       </div>
+      <AlertComponent />
     </div>
   );
 }

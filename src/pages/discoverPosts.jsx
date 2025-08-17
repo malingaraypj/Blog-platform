@@ -11,6 +11,8 @@ function DiscoverPosts() {
     "discover",
   ]);
 
+  console.log(data);
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center">

@@ -2,6 +2,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import { FaRegImage, FaRegFileVideo } from "react-icons/fa6";
+import AlertComponent from "./AlertComponent";
 
 function FileUploadInput({ type, onSelect }) {
   const fileRef = useRef(null);

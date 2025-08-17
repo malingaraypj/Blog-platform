@@ -15,6 +15,8 @@ function PostDetails() {
     ["post", postId]
   );
 
+  console.log(data);
+
   if (isLoading) {
     return <LoaderFive />;
   }

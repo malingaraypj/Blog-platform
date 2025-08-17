@@ -6,7 +6,6 @@ export function useReplyPost() {
   return useMutation({
     mutationFn: ({ post_id, formData }) => replyPost({ post_id, formData }),
 
-    // eslint-disable-next-line no-unused-vars
     onMutate: async ({ post_id }) => {
       // Cancel any outgoing refetches
       await queryClient.cancelQueries({ queryKey: ["post"] });
