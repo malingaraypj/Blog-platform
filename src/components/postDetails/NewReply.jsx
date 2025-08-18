@@ -17,7 +17,6 @@ import { useReplyPost } from "@/Hooks/post/useReplyPost";
 import { useDispatch } from "react-redux";
 import { newPostActions } from "@/store/NewPost/newPost";
 import { useCreatePost } from "@/Hooks/post/useCreatePost";
-import AlertComponent from "@/utils/AlertComponent";
 
 // Each icon mapped to a Unicode emoji equivalent
 const emojiOptions = [
@@ -134,7 +133,6 @@ function NewReply({
           {postPending ? "creating..." : "Post"}
         </Button>
       </div>
-      <AlertComponent />
     </div>
   );
 }

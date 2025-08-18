@@ -6,7 +6,7 @@ export const useCreatePost = () => {
   return useMutation({
     mutationFn: (data) => createPost(data),
     onSuccess: () => {
-      queryClient.invalidateQueries(["post"]);
+      queryClient.invalidateQueries(["posts"]);
     },
     onError: (error) => {
       console.error("Post creation failed:", error.message);

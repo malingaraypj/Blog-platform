@@ -8,11 +8,11 @@ export function useReplyPost() {
 
     onMutate: async ({ post_id }) => {
       // Cancel any outgoing refetches
-      await queryClient.cancelQueries({ queryKey: ["post"] });
+      await queryClient.cancelQueries({ queryKey: ["posts"] });
 
       // Snapshot the previous value
-      const prevDiscover = queryClient.getQueryData(["post", "discover"]);
-      const prevFollowing = queryClient.getQueryData(["post", "following"]);
+      const prevDiscover = queryClient.getQueryData(["posts", "discover"]);
+      const prevFollowing = queryClient.getQueryData(["posts", "following"]);
 
       // optimistically update both rollback
       const updateList = (old) => {
@@ -29,20 +29,20 @@ export function useReplyPost() {
         });
       };
 
-      queryClient.setQueryData(["post", "discover"], updateList);
-      queryClient.setQueryData(["post", "following"], updateList);
+      queryClient.setQueryData(["posts", "discover"], updateList);
+      queryClient.setQueryData(["posts", "following"], updateList);
 
       return { prevDiscover, prevFollowing };
     },
 
     onError: (err, variables, context) => {
       // Rollback to previous value
-      queryClient.setQueryData(["post", "discover"], context.prevDiscover);
-      queryClient.setQueryData(["post", "following"], context.prevFollowing);
+      queryClient.setQueryData(["posts", "discover"], context.prevDiscover);
+      queryClient.setQueryData(["posts", "following"], context.prevFollowing);
     },
 
     onSettled: (data, error, { post_id }) => {
-      queryClient.invalidateQueries(["post", post_id]);
+      queryClient.invalidateQueries(["posts", post_id]);
     },
   });
 }

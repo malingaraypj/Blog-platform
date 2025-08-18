@@ -5,7 +5,7 @@ import { useGetPost } from "@/Hooks/post/useGetPost";
 
 function FollowingPosts() {
   const { data, isLoading } = useGetPost(getFollowingPosts, [
-    "post",
+    "posts",
     "following",
   ]);
   if (isLoading) {

@@ -19,3 +19,9 @@ export const getMe = async () => {
   const url = `${baseUrl}/users/getMe`;
   return await getData(url);
 };
+
+export const savePost = async (post_id) => {
+  console.log(post_id);
+  const url = `${baseUrl}/users/savePost/${post_id}`;
+  return await patchData(url);
+};

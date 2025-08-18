@@ -50,5 +50,6 @@ export const replyPost = async ({ post_id, formData }) => {
 
 export const createPost = async (data) => {
   const url = `${baseUrl}/post/newPost`;
+  console.log(data.get("content"));
   return await postData(url, data);
 };

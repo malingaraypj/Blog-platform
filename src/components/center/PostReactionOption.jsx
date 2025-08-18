@@ -3,19 +3,25 @@ import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import { HiOutlineShare } from "react-icons/hi";
 import { useToggleLike } from "@/Hooks/post/useToggleLiks";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Added useEffect
+import { useSavePost } from "@/Hooks/post/useSavePost";
 
 function PostReactionOption({ data, handleOpenReply }) {
-  const loggedUser = localStorage.getItem("loggedUser");
-
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
   const { mutate } = useToggleLike();
-  const [isLiked, setIsLiked] = useState(
-    loggedUser && data?.likes ? data.likes.includes(loggedUser) : false
-  );
+  const { mutate: saveMutate } = useSavePost();
+  const [isLiked, setIsLiked] = useState(false);
+
+  // Sync isLiked state with data prop changes
+  useEffect(() => {
+    if (loggedUser && data?.likes) {
+      setIsLiked(data.likes.includes(loggedUser._id));
+    } else {
+      setIsLiked(false);
+    }
+  }, [data, loggedUser]); // Update when data or loggedUser changes
 
   const handleLikeClick = () => {
-    const newLikeStatus = !isLiked;
-    setIsLiked(newLikeStatus);
     mutate({
       post_id: data._id,
     });
@@ -48,7 +54,6 @@ function PostReactionOption({ data, handleOpenReply }) {
       </div>
 
       {/* Reply */}
-
       <div
         onClick={handleOpenReply}
         className="flex items-center gap-1 cursor-pointer hover:text-teal-500"
@@ -64,8 +69,14 @@ function PostReactionOption({ data, handleOpenReply }) {
       </div>
 
       {/* Bookmark */}
-      <div className="cursor-pointer hover:text-yellow-500">
+      <div
+        onClick={() => {
+          saveMutate(data._id);
+        }}
+        className="flex items-center gap-1 cursor-pointer hover:text-teal-500"
+      >
         <CiBookmark size={20} />
+        <span>{data?.saved_count || 0}</span>
       </div>
     </div>
   );

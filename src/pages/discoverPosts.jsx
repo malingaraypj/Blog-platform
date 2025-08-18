@@ -7,11 +7,9 @@ import { LoaderOne } from "@/components/ui/loader";
 
 function DiscoverPosts() {
   const { data, isLoading } = useGetPost(getDiscoverPosts, [
-    "post",
+    "posts",
     "discover",
   ]);
-
-  console.log(data);
 
   if (isLoading) {
     return (

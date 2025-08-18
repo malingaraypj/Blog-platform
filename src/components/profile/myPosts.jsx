@@ -4,7 +4,7 @@ import { LoaderOne } from "../ui/loader";
 import { useGetPost } from "@/Hooks/post/useGetPost";
 
 function Myposts() {
-  const { data, isLoading } = useGetPost(getMyPosts, ["myPosts"]);
+  const { data, isLoading } = useGetPost(getMyPosts, ["posts", "myposts"]);
   if (isLoading) {
     return (
       <div className="flex justify-center items-center">
