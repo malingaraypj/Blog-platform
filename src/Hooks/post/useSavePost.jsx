@@ -1,5 +1,5 @@
 import { queryClient } from "@/api/helper";
-import { savePost } from "@/api/user";
+import { savePost } from "@/api/post";
 import { useMutation } from "@tanstack/react-query";
 
 export const useSavePost = () => {

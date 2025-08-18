@@ -53,3 +53,8 @@ export const createPost = async (data) => {
   console.log(data.get("content"));
   return await postData(url, data);
 };
+
+export const savePost = async (post_id) => {
+  const url = `${baseUrl}/post/savePost/${post_id}`;
+  return await patchData(url);
+};

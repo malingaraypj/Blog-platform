@@ -1,85 +1,66 @@
-import { useEffect, useState } from "react";
 import SiteIcon from "../components/others/SiteIcon";
-// import Input from "../utils/Input";
 import { Input } from "@/components/ui/input";
-import { useRegister } from "../Hooks/useRegister";
-import { Link, useNavigate } from "react-router";
-import { Button } from "@/components/ui/button";
+import { Link } from "react-router";
 import { DobPicker } from "@/components/ui/dob_picker";
+import { useActionState, useState } from "react";
+import Submit from "@/components/Register/submit";
+import { z } from "zod";
+import { registerUser } from "@/api/user";
+import { useNavigate } from "react-router";
+
+const registerSchema = z
+  .object({
+    username: z.string().min(2, "Name must be at least 2 characters"),
+    email: z.string().email("Invalid email address"),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    confirmPassword: z.string(),
+    DOB: z.date({ required_error: "Date of birth is required" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
 function Register() {
-  const [password, setPassword] = useState({ value: "", isEdited: false });
-  const [confirmPassword, setConfirmPassword] = useState({
-    value: "",
-    isEdited: false,
-  });
-  const [passwordMatchError, setPasswordMatchError] = useState(false);
+  const [date, setDate] = useState(null);
+  const navigate = useNavigate("/login");
 
-  const navigate = useNavigate();
+  const RegisterAction = async (prevState, formData) => {
+    const values = {
+      username: formData.get("username") || "",
+      email: formData.get("email") || "",
+      password: formData.get("password") || "",
+      confirmPassword: formData.get("confirmPassword") || "",
+      DOB: date,
+    };
 
-  const {
-    backendErrors,
-    setBackendErrors,
-    setValidationErrors,
-    validationErrors,
-    registerSuccess,
-    registerUser,
-  } = useRegister();
+    const result = registerSchema.safeParse(values);
+    if (!result.success) {
+      return {
+        errors: result.error.errors.map((e) => ({
+          path: e.path[0],
+          message: e.message,
+        })),
+        enteredValues: values,
+      };
+    }
 
-  useEffect(() => {
-    if (registerSuccess) {
+    try {
+      await registerUser(values);
+      // navigate to login page
       navigate("/login");
+    } catch (err) {
+      return {
+        errors: [{ path: "backend", message: err.message }],
+        enteredValues: values,
+      };
     }
-  }, [registerSuccess, navigate]);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const fd = new FormData(e.target);
-    const data = Object.fromEntries(fd.entries());
-
-    if (data.password !== data.confirmpassword) {
-      setPasswordMatchError(true);
-      return;
-    }
-
-    console.log(data);
-
-    await registerUser(data);
-    e.target.reset();
-    setConfirmPassword({ isEdited: false, value: "" });
   };
 
-  const handleOnFocus = (event) => {
-    if (event.target.id === "confirmpassword") {
-      setPasswordMatchError(false);
-    }
-    setBackendErrors(null);
-    setValidationErrors({ name: "", password: "", dob: "" });
-  };
-
-  const handleOnBlur = () => {
-    if (!password.isEdited || password.value === "") {
-      setConfirmPassword((prev) => ({ ...prev, value: "" }));
-      return;
-    }
-    if (
-      password.isEdited &&
-      confirmPassword.isEdited &&
-      password.value !== confirmPassword.value
-    ) {
-      setPasswordMatchError(true);
-      return;
-    }
-    setPasswordMatchError(false);
-  };
-
-  const handleConfirmPasswordChange = (event) => {
-    setConfirmPassword({ isEdited: true, value: event.target.value });
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword({ isEdited: true, value: event.target.value });
-  };
+  const [formState, formAction, isPending] = useActionState(RegisterAction, {
+    errors: null,
+    enteredValues: {},
+  });
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900 px-4 py-8 text-white">
@@ -89,14 +70,7 @@ function Register() {
           <SiteIcon />
         </div>
 
-        {/* Backend errors */}
-        {backendErrors && (
-          <p className="text-red-500 font-semibold text-center">
-            {backendErrors}
-          </p>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form action={formAction} className="space-y-8">
           <h1 className="text-3xl font-bold text-white text-center">
             Create Your Account
           </h1>
@@ -104,56 +78,57 @@ function Register() {
           {/* Name + Email */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <Input
+              name="username"
+              defaultValue={formState?.enteredValues?.username}
               type="text"
-              id="name"
-              error={validationErrors.name}
-              onFocus={handleOnFocus}
               placeholder="Enter user name"
+              required
             />
             <Input
+              name="email"
+              defaultValue={formState?.enteredValues?.email}
               type="email"
-              id="email"
-              onFocus={handleOnFocus}
               placeholder="Enter email"
+              required
             />
           </div>
 
           {/* Password + Confirm Password */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <Input
-              onBlur={handleOnBlur}
-              onFocus={handleOnFocus}
-              id="password"
-              onChange={handlePasswordChange}
+              name="password"
+              defaultValue={formState?.enteredValues?.password}
               type="password"
-              error={validationErrors.password}
               placeholder="Enter password"
+              required
             />
             <Input
-              onBlur={handleOnBlur}
-              onFocus={handleOnFocus}
-              id="confirmpassword"
-              value={confirmPassword.value}
-              onChange={handleConfirmPasswordChange}
-              error={passwordMatchError ? "Password doesn't match" : ""}
+              name="confirmPassword"
+              defaultValue={formState?.enteredValues?.confirmPassword}
               type="password"
               placeholder="Confirm password"
+              required
             />
           </div>
 
-          {/* DOB + Buttons */}
+          {/* DOB  + submit*/}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
-            <DobPicker />
-
+            <DobPicker setDate={setDate} date={date} />
             <div className="flex gap-4 w-full sm:w-auto">
-              <Button type="submit" variant="ghost" className="bg-blue-500">
-                Submit
-              </Button>
-              <Button type="reset" variant="ghost" className="bg-blue-500">
-                Reset
-              </Button>
+              <Submit isPending={isPending} />
             </div>
           </div>
+
+          {/* Error messages */}
+          {formState.errors && (
+            <div className="space-y-2">
+              {formState.errors.map((error, i) => (
+                <p key={i} className="text-red-400 text-center">
+                  {error.message}
+                </p>
+              ))}
+            </div>
+          )}
 
           {/* Login link */}
           <p className="text-center text-gray-400">
