@@ -1,6 +1,6 @@
 // import { useQuery } from "@tanstack/react-query";
 import { getDiscoverPosts } from "../api/post";
-import PostDisplayWrapper from "../components/center/PostDisplayWrapper";
+import PostDisplayWrapper from "../components/Posts/PostDisplayWrapper";
 import { Outlet } from "react-router";
 import { useGetPost } from "@/Hooks/post/useGetPost";
 import { LoaderOne } from "@/components/ui/loader";

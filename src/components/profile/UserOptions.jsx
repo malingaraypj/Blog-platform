@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Myposts from "./myPosts";
+import Bookmarks from "./bookMarks";
+import LikedPosts from "./likedPosts";
 
 function UserOptions() {
   const [activeTab, setActiveTab] = useState("posts");
@@ -33,11 +35,11 @@ function UserOptions() {
         </button>
         <button
           className={`${baseClass} ${
-            activeTab === "follow" ? activeClass : ""
+            activeTab === "bookmarks" ? activeClass : ""
           }`}
-          onClick={() => setActiveTab("follow")}
+          onClick={() => setActiveTab("bookmarks")}
         >
-          Follow Recommendation
+          Bookmarks
         </button>
       </div>
 
@@ -45,8 +47,8 @@ function UserOptions() {
       <div className="mt-4">
         {activeTab === "posts" && <Myposts />}
         {activeTab === "replies" && <div>Replies Content Here</div>}
-        {activeTab === "likes" && <div>Replies Content Here</div>}
-        {activeTab === "follow" && <div>Replies Content Here</div>}
+        {activeTab === "likes" && <LikedPosts />}
+        {activeTab === "bookmarks" && <Bookmarks />}
       </div>
     </div>
   );

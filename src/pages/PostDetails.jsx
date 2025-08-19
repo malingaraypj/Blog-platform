@@ -2,10 +2,10 @@ import { getPostById } from "../api/post";
 import { useParams } from "react-router";
 import { LoaderFive } from "@/components/ui/loader";
 import { useGetPost } from "@/Hooks/post/useGetPost";
-import PostItem from "@/components/center/PostItem";
+import PostItem from "@/components/Posts/PostItem";
 import NewReply from "@/components/postDetails/NewReply";
 import PageHeader from "@/components/layout/pageHeader";
-import PostDisplayWrapper from "@/components/center/PostDisplayWrapper";
+import PostDisplayWrapper from "@/components/Posts/PostDisplayWrapper";
 
 function PostDetails() {
   const { postId } = useParams();

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import PostUserProfile from "../center/PostUserProfile";
+import PostUserProfile from "../Posts/PostUserProfile";
 import { followUser } from "../../api/user";
 import { queryClient } from "../../api/helper";
 

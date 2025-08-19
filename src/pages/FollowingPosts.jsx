@@ -1,4 +1,4 @@
-import PostDisplayWrapper from "../components/center/PostDisplayWrapper";
+import PostDisplayWrapper from "../components/Posts/PostDisplayWrapper";
 import { getFollowingPosts } from "../api/post";
 import { LoaderOne } from "@/components/ui/loader";
 import { useGetPost } from "@/Hooks/post/useGetPost";

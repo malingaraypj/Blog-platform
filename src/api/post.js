@@ -13,6 +13,16 @@ export const getMyPosts = async () => {
   return await getData(url);
 };
 
+export const getBookMarks = async () => {
+  const url = `${baseUrl}/post/allSavedPosts`;
+  return await getData(url);
+};
+
+export const getLikedPosts = async () => {
+  const url = `${baseUrl}/post/allLikedPosts`;
+  return await getData(url);
+};
+
 export const getFollowingPosts = async () => {
   const url = `${baseUrl}/post/followingPosts`;
   return await getData(url);

@@ -1,5 +1,5 @@
 import { getMyPosts } from "../../api/post";
-import PostDisplayWrapper from "../center/PostDisplayWrapper";
+import PostDisplayWrapper from "../Posts/PostDisplayWrapper";
 import { LoaderOne } from "../ui/loader";
 import { useGetPost } from "@/Hooks/post/useGetPost";
 

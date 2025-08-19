@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 
 function Submit() {
   const { pending } = useFormStatus();
+
   return (
     <>
       <Button
@@ -11,7 +12,7 @@ function Submit() {
         disabled={pending}
         className="bg-blue-500"
       >
-        {pending ? "Submiting..." : "submit"}
+        {pending ? "Submitting..." : "Submit"}
       </Button>
       <Button
         type="reset"

@@ -19,7 +19,7 @@ function PostItem({ data, isDetail = false }) {
 
       {/* Content */}
       <div
-        onClick={() => navigate(`/app/${data._id}`)}
+        onClick={() => !isDetail && navigate(`/app/${data._id}`)}
         className="w-full flex flex-col justify-start items-start gap-3 mt-2"
       >
         <p
@@ -28,7 +28,7 @@ function PostItem({ data, isDetail = false }) {
           {data.content}
         </p>
 
-        {data?.media.length > 0 && <ImageSlider images={data.media} />}
+        {data?.media?.length > 0 && <ImageSlider images={data.media} />}
       </div>
 
       <PostReactionOption handleOpenReply={handleOpenReply} data={data} />
