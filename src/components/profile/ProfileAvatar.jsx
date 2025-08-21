@@ -1,8 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export default function ProfileAvatar() {
+export default function ProfileAvatar({ className }) {
   return (
-    <Avatar>
+    <Avatar className={className}>
       <AvatarImage
         src={`${
           import.meta.env.VITE_BACKEND_PUBLIC_URL

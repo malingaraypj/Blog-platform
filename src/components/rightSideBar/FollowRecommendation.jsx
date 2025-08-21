@@ -5,7 +5,7 @@ import { LoaderFive } from "../ui/loader";
 
 function FollowRecommendation() {
   const { data, isLoading } = useQuery({
-    queryKey: ["follow suggestion"],
+    queryKey: ["follow", "suggestion"],
     queryFn: () => getFollowSuggestions(4),
   });
   if (isLoading) {

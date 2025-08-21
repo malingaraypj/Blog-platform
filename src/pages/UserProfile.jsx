@@ -7,13 +7,16 @@ import { LoaderFive } from "@/components/ui/loader";
 import PageHeader from "@/components/layout/pageHeader";
 
 function UserProfile() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["userProfile"],
     queryFn: getMe,
     refetchOnWindowFocus: true,
   });
   if (isLoading) {
     return <LoaderFive />;
+  }
+  if (isError) {
+    if (isError) return <QueryError error={error} reset={refetch} />;
   }
 
   return (

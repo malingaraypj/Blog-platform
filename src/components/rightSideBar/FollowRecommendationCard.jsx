@@ -1,26 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
+import { useFollow } from "@/Hooks/users/useToggleFollow";
 import PostUserProfile from "../Posts/PostUserProfile";
-import { followUser } from "../../api/user";
-import { queryClient } from "../../api/helper";
 
 function FollowRecommendationCard({ data }) {
-  const { mutateAsync: followMutate, isPending } = useMutation({
-    mutationKey: ["follow user"],
-    mutationFn: followUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["follow suggestion"]);
-      queryClient.invalidateQueries(["followers"]);
-    },
-    onError: (error) => {
-      console.error("Error following user:", error);
-    },
-  });
-
-  console.log(data);
+  const { mutateAsync: followMutate, isPending } = useFollow();
 
   const handleFollow = async () => {
     try {
-      await followMutate({ userId: data.userId });
+      await followMutate(data.userId);
     } catch (error) {
       console.error("Error following user:", error);
     }

@@ -36,6 +36,9 @@ const authSlice = createSlice({
       state.logInstatus = "error";
       state.errorMsg = action.payload || "login failed";
     },
+    updateUser: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+    },
   },
 });
 

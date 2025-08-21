@@ -4,12 +4,13 @@ import PostDisplayWrapper from "../components/Posts/PostDisplayWrapper";
 import { Outlet } from "react-router";
 import { useGetPost } from "@/Hooks/post/useGetPost";
 import { LoaderOne } from "@/components/ui/loader";
+import QueryError from "@/components/Errors/QueryError";
 
 function DiscoverPosts() {
-  const { data, isLoading } = useGetPost(getDiscoverPosts, [
-    "posts",
-    "discover",
-  ]);
+  const { data, isLoading, isError, error, refetch } = useGetPost(
+    getDiscoverPosts,
+    ["posts", "discover"]
+  );
 
   if (isLoading) {
     return (
@@ -17,6 +18,10 @@ function DiscoverPosts() {
         <LoaderOne />;
       </div>
     );
+  }
+
+  if (isError) {
+    if (isError) return <QueryError error={error} reset={refetch} />;
   }
 
   if (!isLoading && data && data.length === 0) {

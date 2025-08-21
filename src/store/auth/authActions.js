@@ -26,7 +26,9 @@ export const logInUser = ({ email, password }) => {
   };
 };
 
-export const logoutUser = (dispatch) => {
-  localStorage.removeItem("token");
-  dispatch(authActions.logout());
+export const logoutUser = () => {
+  return (dispatch) => {
+    localStorage.removeItem("token");
+    dispatch(authActions.logout());
+  };
 };

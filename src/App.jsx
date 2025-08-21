@@ -14,6 +14,8 @@ import UserProfile from "./pages/UserProfile";
 import DiscoverPosts from "./pages/discoverPosts";
 import FollowingPosts from "./pages/FollowingPosts";
 import PostDetails from "./pages/PostDetails";
+import Explore from "./pages/Explore";
+import HomeErrorComponent from "./components/Errors/QueryError";
 
 const router = createBrowserRouter([
   { path: "/", element: <Register /> },
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
           },
         ],
       },
-      { path: "explore", element: <div>Explore...</div> },
+      { path: "explore", element: <Explore /> },
       { path: "notification", element: <div>Notifications...</div> },
       { path: "messages", element: <div>Messages...</div> },
       { path: "profile", element: <UserProfile /> },
