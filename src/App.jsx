@@ -15,7 +15,6 @@ import DiscoverPosts from "./pages/discoverPosts";
 import FollowingPosts from "./pages/FollowingPosts";
 import PostDetails from "./pages/PostDetails";
 import Explore from "./pages/Explore";
-import HomeErrorComponent from "./components/Errors/QueryError";
 
 const router = createBrowserRouter([
   { path: "/", element: <Register /> },

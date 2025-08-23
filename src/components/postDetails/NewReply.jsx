@@ -17,6 +17,7 @@ import { useReplyPost } from "@/Hooks/post/useReplyPost";
 import { useDispatch } from "react-redux";
 import { newPostActions } from "@/store/NewPost/newPost";
 import { useCreatePost } from "@/Hooks/post/useCreatePost";
+import { MultiSelectInput } from "../../utils/MultiSelectInput";
 
 // Each icon mapped to a Unicode emoji equivalent
 const emojiOptions = [
@@ -41,6 +42,7 @@ function NewReply({
 }) {
   const [replyText, setReplyText] = useState("");
   const [mediaFiles, setMediaFiles] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -58,6 +60,7 @@ function NewReply({
 
     const formData = new FormData();
     formData.append("content", replyText);
+    formData.append("categories", selectedCategories);
 
     mediaFiles.forEach((m) => {
       if (m.type === "image") formData.append("image", m.file);
@@ -71,6 +74,7 @@ function NewReply({
     if (!isDetail && !isNewPost) handleOpenReply(); // opening and closing of newReply component, should not be in postDetail page
 
     setReplyText("");
+    setSelectedCategories([]);
   };
 
   const handleOnBlur = () => {
@@ -84,6 +88,12 @@ function NewReply({
     setMediaFiles((prev) => {
       return [...prev, { file, type }];
     });
+  };
+
+  const handleCategorySelection = (val) => {
+    setSelectedCategories((prev) =>
+      prev.includes(val) ? prev.filter((item) => item !== val) : [...prev, val]
+    );
   };
 
   return (
@@ -116,13 +126,15 @@ function NewReply({
             type="image"
             onSelect={(file) => handleFileSelection(file, "image")}
           />
-          {/* <FileUploadInput
-            type="video"
-            onSelect={(file) => handleFileSelection(file, "video")}
-          /> */}
+
           <EmojiSelector
             emojiOptions={emojiOptions}
             onSelect={(emoji) => handleEmojiSelection(emoji.char)}
+          />
+          <MultiSelectInput
+            selected={selectedCategories}
+            setSelected={handleCategorySelection}
+            options={["sports", "entertainment", "music", "news"]}
           />
         </div>
 

@@ -1,12 +1,13 @@
 // import { useQuery } from "@tanstack/react-query";
 import { getDiscoverPosts } from "../api/post";
 import PostDisplayWrapper from "../components/Posts/PostDisplayWrapper";
-import { Outlet } from "react-router";
 import { useGetPost } from "@/Hooks/post/useGetPost";
 import { LoaderOne } from "@/components/ui/loader";
 import QueryError from "@/components/Errors/QueryError";
+// import { useState } from "react";
 
 function DiscoverPosts() {
+  // const [page, setpage] = useState(1);
   const { data, isLoading, isError, error, refetch } = useGetPost(
     getDiscoverPosts,
     ["posts", "discover"]
@@ -32,8 +33,7 @@ function DiscoverPosts() {
 
   return (
     <>
-      <PostDisplayWrapper data={data} />
-      <Outlet />
+      <PostDisplayWrapper data={data} isLoading={isLoading} />
     </>
   );
 }

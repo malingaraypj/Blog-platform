@@ -4,7 +4,13 @@ import { getData, patchData, postData } from "./helper";
 export const baseUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const getDiscoverPosts = async () => {
-  const url = `${baseUrl}/post/`;
+  const url = `${baseUrl}/post`;
+
+  return await getData(url);
+};
+
+export const getPostsByCategory = async (category) => {
+  const url = `${baseUrl}/post/postsByCategory?categories=${category}`;
   return await getData(url);
 };
 
