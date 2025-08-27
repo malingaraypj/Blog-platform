@@ -1,4 +1,4 @@
-import { useGetBookmarks } from "@/Hooks/post/useGetBookmarks";
+import { useGetBookmarks } from "@/Hooks/post/get queries/useGetBookmarks";
 import PostDisplayWrapper from "../Posts/PostDisplayWrapper";
 
 function Bookmarks() {

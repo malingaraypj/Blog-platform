@@ -1,7 +1,7 @@
 // import { useQuery } from "@tanstack/react-query";
 import { getDiscoverPosts } from "../api/post";
 import PostDisplayWrapper from "../components/Posts/PostDisplayWrapper";
-import { useGetPost } from "@/Hooks/post/useGetPost";
+import { useGetPost } from "@/Hooks/post/get queries/useGetPost";
 import { LoaderOne } from "@/components/ui/loader";
 import QueryError from "@/components/Errors/QueryError";
 // import { useState } from "react";

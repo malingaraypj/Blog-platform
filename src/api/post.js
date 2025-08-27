@@ -74,3 +74,8 @@ export const savePost = async (post_id) => {
   const url = `${baseUrl}/post/savePost/${post_id}`;
   return await patchData(url);
 };
+
+export const sharePost = async ({ post_id, sendTo }) => {
+  const url = `${baseUrl}/post/${post_id}/share/${sendTo}`;
+  return await patchData(url);
+};

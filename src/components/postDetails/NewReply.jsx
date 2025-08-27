@@ -12,7 +12,7 @@ import { useState } from "react";
 import ProfileAvatar from "../profile/ProfileAvatar";
 import FileUploadInput from "@/utils/file-upload";
 import { Button } from "../ui/button";
-import { useReplyPost } from "@/Hooks/post/useReplyPost";
+import { useReplyPost } from "@/Hooks/post/PostInteraction.jsx/useReplyPost";
 
 import { useDispatch } from "react-redux";
 import { newPostActions } from "@/store/NewPost/newPost";

@@ -1,4 +1,4 @@
-import { useLikedPosts } from "@/Hooks/post/useGetLikedPosts";
+import { useLikedPosts } from "@/Hooks/post/get queries/useGetLikedPosts";
 import PostDisplayWrapper from "../Posts/PostDisplayWrapper";
 
 function LikedPosts() {

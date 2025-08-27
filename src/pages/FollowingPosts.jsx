@@ -1,7 +1,7 @@
 import PostDisplayWrapper from "../components/Posts/PostDisplayWrapper";
 import { getFollowingPosts } from "../api/post";
 import { LoaderOne } from "@/components/ui/loader";
-import { useGetPost } from "@/Hooks/post/useGetPost";
+import { useGetPost } from "@/Hooks/post/get queries/useGetPost";
 
 function FollowingPosts() {
   const { data, isLoading, isError, error, refetch } = useGetPost(

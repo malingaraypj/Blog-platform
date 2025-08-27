@@ -1,7 +1,7 @@
 import { getMyPosts } from "../../api/post";
 import PostDisplayWrapper from "../Posts/PostDisplayWrapper";
 import { LoaderOne } from "../ui/loader";
-import { useGetPost } from "@/Hooks/post/useGetPost";
+import { useGetPost } from "@/Hooks/post/get queries/useGetPost";
 
 function Myposts() {
   const { data, isLoading } = useGetPost(getMyPosts, ["posts", "myposts"]);

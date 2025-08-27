@@ -2,13 +2,18 @@ import { AiOutlineLike, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import { BiRepost } from "react-icons/bi";
 import { CiBookmark } from "react-icons/ci";
 import { HiOutlineShare } from "react-icons/hi";
-import { useToggleLike } from "@/Hooks/post/useToggleLiks";
+import { useToggleLike } from "@/Hooks/post/PostInteraction.jsx/useToggleLiks";
 import { useState, useEffect } from "react"; // Added useEffect
-import { useSavePost } from "@/Hooks/post/useSavePost";
+import { useSavePost } from "@/Hooks/post/PostInteraction.jsx/useSavePost";
+// import { useSharePost } from "@/Hooks/post/PostInteraction.jsx/useSharePost";
+import SearchInput from "@/utils/searchInput";
 
 function PostReactionOption({ data, handleOpenReply }) {
+  const [startSharingPost, setStartSharingPost] = useState(false);
   const loggedUser = JSON.parse(localStorage.getItem("user"));
   const { mutate } = useToggleLike();
+  // const { mutate: shareMutate } = useSharePost();
+
   const { mutate: saveMutate } = useSavePost();
   const [isLiked, setIsLiked] = useState(false);
 
@@ -63,7 +68,10 @@ function PostReactionOption({ data, handleOpenReply }) {
       </div>
 
       {/* Share */}
-      <div className="flex items-center gap-1 cursor-pointer hover:text-teal-500">
+      <div
+        onClick={() => setStartSharingPost(true)}
+        className="flex items-center gap-1 cursor-pointer hover:text-teal-500"
+      >
         <HiOutlineShare size={20} />
         <span>{data?.shares_count || 0}</span>
       </div>
@@ -78,6 +86,12 @@ function PostReactionOption({ data, handleOpenReply }) {
         <CiBookmark size={20} />
         <span>{data?.saved_count || 0}</span>
       </div>
+
+      {startSharingPost && (
+        <div>
+          <SearchInput />
+        </div>
+      )}
     </div>
   );
 }
